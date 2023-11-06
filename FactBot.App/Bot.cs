@@ -17,18 +17,18 @@ public abstract class Bot : Discord
             Intents = DiscordIntents.All,
             Token = BotToken,
             TokenType = TokenType.Bot,
-            //will attempt to reconnect if bot crashes
+            // Will attempt to reconnect if bot crashes
             AutoReconnect = true
         };
 
         Client = new DiscordClient(discordConfig);
 
-        //Fired when this client has successfully completed its handshake with the websocket gateway.
+        // Fired when this client has successfully completed its handshake with the websocket gateway.
         Client.Ready += Client_Ready;
     
-        //Connects to gateway
+        // Connects to gateway
         await Client.ConnectAsync();
-        //Runs bot indefinitely
+        // Runs bot indefinitely
         await Task.Delay(-1);
     }
     
