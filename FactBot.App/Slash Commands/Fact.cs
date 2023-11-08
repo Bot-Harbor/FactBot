@@ -27,8 +27,7 @@ public class Fact : ApplicationCommandModule
                     Color = _interactionHandler.ExecuteColorEmbed(new RandomEmbedColor())
                 };
                 
-                await ctx.Interaction.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new
-                    DiscordInteractionResponseBuilder().AddEmbed(embed: factEmbed));
+                await ctx.CreateResponseAsync(new DiscordInteractionResponseBuilder().AddEmbed(embed: factEmbed));
             }
         }
         else
@@ -39,8 +38,7 @@ public class Fact : ApplicationCommandModule
                     Color = DiscordColor.Red
                 };
                 
-                await ctx.Interaction.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new
-                    DiscordInteractionResponseBuilder().AddEmbed(errorEmbed));
+                await ctx.CreateResponseAsync(new DiscordInteractionResponseBuilder().AddEmbed(errorEmbed));
         }
     }
 }

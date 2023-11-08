@@ -17,7 +17,6 @@ public class Ping : ApplicationCommandModule
             Color = DiscordColor.Orange
         };
         
-        await ctx.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder()
-            .AddEmbed(pingEmbed));
+        await ctx.CreateResponseAsync(new DiscordInteractionResponseBuilder().AddEmbed(pingEmbed));
     }
 }
