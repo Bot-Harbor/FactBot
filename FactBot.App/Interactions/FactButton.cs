@@ -9,7 +9,7 @@ namespace FactBot.App.Interactions;
 public class FactButton : IButton
 {
     private readonly InteractionHandler _interactionHandler = new InteractionHandler();
-    
+
     public async Task Execute(DiscordClient sender, ComponentInteractionCreateEventArgs e)
     {
         if (e.Interaction.Data.CustomId == "factBtn")
@@ -28,8 +28,11 @@ public class FactButton : IButton
                         Color = _interactionHandler.ExecuteColorEmbed(new RandomEmbedColor())
                     };
 
-                    await e.Interaction.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new
-                        DiscordInteractionResponseBuilder().AddEmbed(embed: factEmbed));
+                    await e.Interaction.CreateResponseAsync
+                    (
+                        InteractionResponseType.ChannelMessageWithSource, new
+                            DiscordInteractionResponseBuilder().AddEmbed(embed: factEmbed)
+                    );
                 }
             }
             else
@@ -40,8 +43,11 @@ public class FactButton : IButton
                     Color = DiscordColor.Red
                 };
 
-                await e.Interaction.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new
-                    DiscordInteractionResponseBuilder().AddEmbed(errorEmbed));
+                await e.Interaction.CreateResponseAsync
+                (
+                    InteractionResponseType.ChannelMessageWithSource, new
+                        DiscordInteractionResponseBuilder().AddEmbed(errorEmbed)
+                );
             }
         }
     }
