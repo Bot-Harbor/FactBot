@@ -41,8 +41,7 @@ public class HelpCommand : ApplicationCommandModule
 
         var messageBuilder = new DiscordMessageBuilder()
             .AddEmbed(helpEmbed)
-            .AddComponents(addButton, apiButton
-            );
+            .AddComponents(addButton, apiButton);
 
         await ctx.CreateResponseAsync
         (
