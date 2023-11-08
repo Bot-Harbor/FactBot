@@ -5,7 +5,7 @@ using FactBot.App.Constants;
 
 namespace FactBot.App.Slash_Commands;
 
-public class Ping : ApplicationCommandModule
+public class PingCommand : ApplicationCommandModule
 {
     [SlashCommand("ping", "Will pong back to server.")]
     public async Task PingCommandAsync(InteractionContext ctx)

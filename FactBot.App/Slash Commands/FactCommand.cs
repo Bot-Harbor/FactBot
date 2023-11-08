@@ -6,7 +6,7 @@ using FactBot.App.Services;
 
 namespace FactBot.App.Slash_Commands;
 
-public class Fact : ApplicationCommandModule
+public class FactCommand : ApplicationCommandModule
 {
     private readonly InteractionHandler _interactionHandler = new InteractionHandler();
     
