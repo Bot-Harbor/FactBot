@@ -5,5 +5,5 @@ namespace FactBot.App.Interfaces;
 
 public interface IButton
 {
-    public Task ButtonHandler(DiscordClient sender, ComponentInteractionCreateEventArgs e);
+    public Task Execute(DiscordClient sender, ComponentInteractionCreateEventArgs e);
 }
