@@ -11,7 +11,7 @@ public class FactButtonCommand : ApplicationCommandModule
     {
         var messageEmbed = new DiscordEmbedBuilder()
         {
-            Description = "Button Will Be Disabled After `` 15 Mins ``",
+            Description = "Button Will Be Disabled After `` 10 Mins ``",
             Color = DiscordColor.Black
         };
         
@@ -27,7 +27,7 @@ public class FactButtonCommand : ApplicationCommandModule
         
         await ctx.CreateResponseAsync(new DiscordInteractionResponseBuilder().AddEmbed(messageEmbed).AddComponents(button));
         
-        await Task.Delay(TimeSpan.FromMinutes(15));
+        await Task.Delay(TimeSpan.FromMinutes(10));
 
         await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddComponents(disableButton));
     }
