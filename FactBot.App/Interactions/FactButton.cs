@@ -25,7 +25,7 @@ public class FactButton : IButton
                     {
                         Title = "Fact 📚 📙",
                         Description = $"```{fact.Fact}.```",
-                        Color = _interactionHandler.ShuffleEmbedColor(new ShuffleColor())
+                        Color = _interactionHandler.ExecuteColorEmbed(new RandomEmbedColor())
                     };
 
                     await e.Interaction.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new
