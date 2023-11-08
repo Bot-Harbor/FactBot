@@ -11,7 +11,7 @@ public class FactButtonCommand : ApplicationCommandModule
     {
         var messageEmbed = new DiscordEmbedBuilder()
         {
-            Description = "Button Will Disable After `` 15 Mins ``",
+            Description = "Button Will Be Disabled After `` 15 Mins ``",
             Color = DiscordColor.Black
         };
         
