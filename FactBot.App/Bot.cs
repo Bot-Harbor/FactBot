@@ -1,15 +1,17 @@
 ﻿using DSharpPlus;
-using DSharpPlus.CommandsNext;
 using DSharpPlus.EventArgs;
-using FactBot.App.Constants;
+using DSharpPlus.SlashCommands;
+using FactBot.App.Secrets;
+using FactBot.App.Interactions;
+using FactBot.App.Slash_Commands;
 
 namespace FactBot.App;
 
 public abstract class Bot : Discord
 {
-    public static DiscordClient Client { get; set; }
-    public static CommandsNextExtension Commands { get; set; }
-
+    private static DiscordClient Client { get; set; }
+    private static readonly InteractionHandler InteractionHandler = new InteractionHandler();
+    
     public static async Task RunBotAsync()
     {
         var discordConfig = new DiscordConfiguration()
@@ -22,14 +24,29 @@ public abstract class Bot : Discord
         };
 
         Client = new DiscordClient(discordConfig);
-
-        // Fired when this client has successfully completed its handshake with the websocket gateway.
+        
+        SlashCommands();
+        
         Client.Ready += Client_Ready;
-    
-        // Connects to gateway
+        
+        Client.ComponentInteractionCreated += async (sender, e) =>
+        {
+            await InteractionHandler.ExecuteButton(new FactButton(), sender, e);
+        };
+
         await Client.ConnectAsync();
-        // Runs bot indefinitely
         await Task.Delay(-1);
+    }
+
+    private static void SlashCommands()
+    {
+        var slashCommands = Client.UseSlashCommands();
+        
+        // Registers Slash Commands
+        slashCommands.RegisterCommands<HelpCommand>();
+        slashCommands.RegisterCommands<PingCommand>();
+        slashCommands.RegisterCommands<FactButtonCommand>();
+        slashCommands.RegisterCommands<FactCommand>();
     }
     
     private static Task Client_Ready(DiscordClient sender, ReadyEventArgs args)
