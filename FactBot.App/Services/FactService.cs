@@ -1,5 +1,5 @@
 ﻿using System.Text.Json;
-using FactBot.App.Constants;
+using FactBot.App.Secrets;
 using FactBot.App.Models;
 
 namespace FactBot.App.Services;

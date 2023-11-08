@@ -1,6 +1,7 @@
 ﻿using DSharpPlus;
 using DSharpPlus.Entities;
 using DSharpPlus.SlashCommands;
+using FactBot.App.Constants;
 
 namespace FactBot.App.Slash_Commands;
 
@@ -11,8 +12,8 @@ public class Ping : ApplicationCommandModule
     {
         var pingEmbed = new DiscordEmbedBuilder()
         {
-            Title = "Ping Command",
-            Description = "Pong 🏓",
+            Title = "Pong 🏓",
+            ImageUrl = Image.PingPongImg,
             Color = DiscordColor.Orange
         };
         
