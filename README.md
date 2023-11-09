@@ -1,7 +1,7 @@
 # FactBot
 A Discord bot that gives the user random facts.
 
-Built with DSharpPlus 4.4.2, .NET Core 3.1, and Docker.
+Built with [DSharpPlus 4.4.2](https://dsharpplus.github.io/DSharpPlus/), .NET Core 3.1, and [Docker](https://www.docker.com/).
 
 ---
 
@@ -24,8 +24,8 @@ Great and affordable resource for hosting images!
 | ------------- | ------------- |
 | `🆘 /help` | Assists the user by displaying all available commands |
 | `🏓 /ping` | Will pong back to the Discord channel |
-| `📚 /fact` | Displays a button that can be pressed to generate a random fact |
-| `🔘 /factbutton` | Gives the user a history question |
+| `📚 /fact` | Generates a random fact |
+| `🔘 /factbutton` | Displays a button that can be pressed to generate a random fact |
 
 ---
 
