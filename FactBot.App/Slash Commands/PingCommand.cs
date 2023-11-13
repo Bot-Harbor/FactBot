@@ -12,7 +12,7 @@ public class PingCommand : ApplicationCommandModule
     {
         var pingEmbed = new DiscordEmbedBuilder()
         {
-            Title = "Pong 🏓",
+            Title = $"Pong 🏓 {ctx.Member.Username}",
             ImageUrl = Image.PingPongImg,
             Color = DiscordColor.Orange
         };
