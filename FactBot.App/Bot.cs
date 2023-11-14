@@ -1,23 +1,18 @@
-﻿using System.Threading.Channels;
-using System.Timers;
+﻿using System.Timers;
 using DSharpPlus;
-using DSharpPlus.Entities;
 using DSharpPlus.EventArgs;
 using DSharpPlus.SlashCommands;
 using FactBot.App.Secrets;
 using FactBot.App.Interactions;
-using FactBot.App.Models;
-using FactBot.App.Services;
 using FactBot.App.Slash_Commands;
+using Timer = System.Threading.Timer;
 
 namespace FactBot.App;
 
 public abstract class Bot : Discord
 {
-    private static DiscordClient Client { get; set; }
+    public static DiscordClient Client { get; set; }
     private static readonly InteractionHandler InteractionHandler = new InteractionHandler();
-    private static readonly FactService FactServiceInstance = FactService.GetInstance();
-    private static List<FactModel> _facts;
 
     public static async Task RunBotAsync()
     {
@@ -32,22 +27,10 @@ public abstract class Bot : Discord
         Client = new DiscordClient(discordConfig);
 
         SlashCommands();
-
-        Client.Ready += Client_Ready;
-
-        _facts = await FactServiceInstance.GetAll(1);
-
-        var now = DateTime.Now;
-        var next9Am = new DateTime(now.Year, now.Month, now.Day, 9, 0, 0);
-        if (now > next9Am)
-        {
-            next9Am = next9Am.AddDays(1);
-        }
-        var delay = next9Am - now;
         
-        var myTimer = new System.Timers.Timer(delay.TotalMilliseconds);
-        myTimer.Elapsed += DailyFact;
-        myTimer.Start();
+        DailyMessageTimer();
+        
+        Client.Ready += Client_Ready;
 
         Client.ComponentInteractionCreated += async (sender, e) =>
         {
@@ -73,36 +56,21 @@ public abstract class Bot : Discord
         return Task.CompletedTask;
     }
 
-    private static async void DailyFact(object sender, ElapsedEventArgs e)
+    private static void DailyMessageTimer()
     {
-        foreach (var guild in Client.Guilds)
-        {
-            var generalChannel = guild.Value.Channels.Values.FirstOrDefault
-            (
-                c =>
-                    c.Type == ChannelType.Text && c.Name.ToLower() == "general" ||
-                    c.Type == ChannelType.Text && c.Name.ToLower() == "y" ||
-                    c.Type == ChannelType.Text && c.Name.ToLower() == "💬general💬"
-            );
-            
-            if (generalChannel != null)
-            {
-                foreach (var fact in _facts)
-                {
-                    var builder = new DiscordEmbedBuilder()
-                    {
-                        Title = "Daily Fact 📅 📚",
-                        Description = $"```{fact.Fact}.```",
-                        Color = InteractionHandler.ExecuteColorEmbed(new RandomEmbedColor())
-                    };
+        var now = DateTime.Now;
+        var scheduledTime = new DateTime(now.Year, now.Month, now.Day, 14, 0, 0);
 
-                    await generalChannel.SendMessageAsync(builder);
-                }
-            }
-            else
-            {
-                Console.WriteLine($"General channel not found in guild {guild.Value.Name} ({guild.Value.Id})");
-            }
+        if (now > scheduledTime)
+        {
+            scheduledTime = scheduledTime.AddDays(1);
         }
+
+        var delay = scheduledTime - now;
+
+        var timer = new System.Timers.Timer(delay.TotalMilliseconds);
+        timer.Elapsed += DailyFact.SendMessage;
+        timer.Enabled = true;
+        timer.AutoReset = true;
     }
 }
