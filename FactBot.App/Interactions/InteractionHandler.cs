@@ -11,9 +11,4 @@ public class InteractionHandler
     {
         return command.Execute();
     }
-    
-    public Task ExecuteButton(IButton button, DiscordClient sender, ComponentInteractionCreateEventArgs e)
-    {
-        return button.Execute(sender, e);
-    }
 }
