@@ -22,8 +22,7 @@ public class HelpCommand : ApplicationCommandModule
         helpEmbed.AddField
         (
             "**🧠  Fact Commands**",
-            $"📚  </fact:1171471344614002728> {Environment.NewLine}" +
-            $"🔘  </factbutton:1171850287112265768>",
+            $"📚  </fact:1171471344614002728> {Environment.NewLine}",
             inline: true
         );
 
