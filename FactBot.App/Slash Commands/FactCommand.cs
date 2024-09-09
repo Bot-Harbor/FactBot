@@ -14,7 +14,7 @@ public class FactCommand : ApplicationCommandModule
     public async Task CommandAsync(InteractionContext ctx)
     {
         var factServiceInstance = FactService.GetInstance();
-        var facts = await factServiceInstance.GetAll(1);
+        var facts = await factServiceInstance.GetAll();
 
         if (facts.Count != 0)
         {

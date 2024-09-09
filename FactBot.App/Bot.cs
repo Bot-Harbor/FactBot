@@ -10,7 +10,7 @@ namespace FactBot.App;
 
 public abstract class Bot
 {
-    public static DiscordClient Client { get; set; }
+    private static DiscordClient Client { get; set; }
     private static readonly InteractionHandler InteractionHandler = new InteractionHandler();
     private static Timer Timer { get; set; } 
 

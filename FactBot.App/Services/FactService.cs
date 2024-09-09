@@ -4,7 +4,7 @@ using FactBot.App.Models;
 
 namespace FactBot.App.Services;
 
-public class FactService : ApiKey
+public class FactService
 {
     private static FactService _instance;
     private FactService() { }
@@ -19,13 +19,13 @@ public class FactService : ApiKey
         return _instance;
     }
     
-    public async Task<List<FactModel>> GetAll(int limit)
+    public async Task<List<FactModel>> GetAll()
     {
         using var client = new HttpClient();
         
-        client.DefaultRequestHeaders.Add("X-Api-Key", $"{FactApiKey}");
+        client.DefaultRequestHeaders.Add("X-Api-Key", ApiKey.FactApiKey);
 
-        var result = await client.GetAsync($"https://api.api-ninjas.com/v1/facts?limit={limit}");
+        var result = await client.GetAsync($"https://api.api-ninjas.com/v1/facts");
         if (result.IsSuccessStatusCode)
         {
             var json = await result.Content.ReadAsStringAsync();
